@@ -1,3 +1,5 @@
+package BlackJack_JavaSocket;
+
 import java.util.*;
 
 public class Deck {
