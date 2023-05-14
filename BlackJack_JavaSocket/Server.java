@@ -15,6 +15,9 @@ public class Server {
     public static Deck deck = new Deck();
 
     public static boolean  status_player = true;
+    public static boolean  status_bot = true;
+
+    public static String result = "";
 
     public static int turn_player = 1;
 
@@ -48,9 +51,14 @@ public class Server {
                 }
                 case "stand" -> {
                     turn_player = 0;
-                    System.out.println(turn_player);
                     botStartProcess();
-                    writer.println("3" + "YOU STAND!!");
+                    writer.println("3" + players);
+                }
+                case "result" -> {
+                    if(turn_player == 2){
+                        summaryResult();
+                        writer.println("4" + result);
+                    }
                 }
                 default -> writer.println("GG");
             }
@@ -62,6 +70,9 @@ public class Server {
         players.clear();
         deck.clearDeck();
         status_player = true;
+        status_bot = true;
+        turn_player = 1;
+        result = "";
         //set players
 
         for (int i=0;i<2;i++){
@@ -115,6 +126,8 @@ public class Server {
             // ดังนั้นจะเอา 0.75 มาใช้การ random ว่าจะอยู่ใน 0.75 นี้ไหม
             // ถ้าอยุ่ จะให้ hit เเต่ถ้าไม่ ก็ stand
             if (bot_score>=21){
+                status_bot = false;
+                turn_player=2;
                 break;
             }
             else if(bot_score<=11){
@@ -130,6 +143,7 @@ public class Server {
                 }
                 else{
                     System.out.println("stand");
+                    turn_player=2;
                     break;
                 }
             }
@@ -156,6 +170,7 @@ public class Server {
                 }
                 else{
                     System.out.println("stand");
+                    turn_player=2;
                     break;
                 }
             }
@@ -167,6 +182,19 @@ public class Server {
 
     }
 
+    public static void summaryResult(){
+        int score_bot = players.get(0).get(0);
+        int score_player = players.get(1).get(0);
+        if (score_player<score_bot && status_bot) {
+            result = "lose";
+        }
+        else if (score_player == score_bot){
+            result = "draw";
+        }
+        else{
+            result = "win";
+        }
+    }
     public static void updateSumScoreCard(Integer index_player,Integer num_card){
         int sum_score = players.get(index_player).get(0);
         int new_value = deck.valueOfCard(num_card);

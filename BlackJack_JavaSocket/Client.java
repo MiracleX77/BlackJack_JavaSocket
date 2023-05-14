@@ -74,8 +74,26 @@ public class Client {
                         }
                     }
                     else  if(message.charAt(0) == '3'){
-                        System.out.println(message.substring(1));
-                        System.out.println("Turn -> Player 1 ");
+                        convertStringToArrayList(message);
+                        System.out.println(message);
+                        System.out.println("*---------------------------------------------*");
+                        System.out.print("Player 1 Card -> : ");
+                        for(int i =1;i<players.get(0).size();i++){
+                            System.out.print(players.get(0).get(i)+" ");
+                        }
+                        System.out.println("\nPlayer 1 Count Score -> : " + players.get(0).get(0));
+                        System.out.println("*---------------------------------------------*");
+                        System.out.print("Player 2 Card -> : ");
+                        for(int i =1;i<players.get(1).size();i++){
+                            System.out.print(players.get(1).get(i)+" ");
+                        }
+                        System.out.println("\nPlayer 2 Count Score -> : " + players.get(1).get(0));
+                        System.out.println("*---------------------------------------------*");
+                    }
+                    else  if(message.charAt(0) == '4'){
+                        System.out.println("------------RESULT-----------------");
+                        System.out.println("------------"+message.substring(1)+"-----------------");
+                        System.out.println("*---------------------------------------------*");
                     }
 
 
@@ -99,6 +117,7 @@ public class Client {
     }
 
     public static void convertStringToArrayList(String message){
+        players.clear();
         //1[[35, 48], [43, 40]]
         String messages = message.substring(3,message.length()-2);
         //  35, 48], [43, 40
