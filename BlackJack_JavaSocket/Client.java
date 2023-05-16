@@ -50,6 +50,7 @@ public class Client {
                         System.out.println("*---------------------------------------------*");
                     }
                     else  if(message.charAt(0) == '2'){
+                        System.out.println(message);
                         String messages = message.substring(1);
                         String[] str = messages.split(" ");
                         int hit_card = Integer.parseInt(str[0]);
