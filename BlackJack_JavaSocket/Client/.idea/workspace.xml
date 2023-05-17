@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5a76dd16-4f26-45b8-acee-34442142b316" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MainGui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/27.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/31.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/33.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/34.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/35.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/36.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/37.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/38.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/39.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/41.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/42.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/43.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/45.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/46.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/47.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/49.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/51.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/52.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/LOGO.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/all/AdobeStock_9626267.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/all/AdobeStock_9626291.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/all/AdobeStock_9626402.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/all/AdobeStock_9626418.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/all/all.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/back-blue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/numcard/back-red.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/page1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/ClientHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MDataGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/MDataGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Server.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2Pv3F6OuezS73jLHHD63Ba0fnlA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/mrbig/Documents/BlackJack/BlackJack_JavaSocket/BlackJack_JavaSocket/Client"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a76dd16-4f26-45b8-acee-34442142b316" name="Changes" comment="" />
+      <created>1684323621869</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684323621869</updated>
+    </task>
+    <servers />
+  </component>
+</project>
