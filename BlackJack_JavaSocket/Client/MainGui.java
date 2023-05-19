@@ -46,7 +46,7 @@ public class MainGui extends JFrame{
         getContentPane().setBackground(new Color(255, 255, 255));
 
         //ต้องเเก้เป็นที่เก็บเเต่ละเครื่อง
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\LOGO.png";
+        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\20.png";
 //        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\1.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage();
