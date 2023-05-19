@@ -6,8 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainGui extends JFrame{
-    int bWidth = 1280;
-    int bHeight = 800;
+    private Client client;
+
+
+    private int x_card_player = 100;
+    private int y_card_player = 400;
+
+    private int x_card_dealer = 100;
+    private int y_card_dealer = 100;
+
     Color colorBackground = new Color(255, 255, 255);
     Color colorButton = new Color(250,162,27);
     Font fontButton = new Font("Mukta Vaani",Font.PLAIN,25);
@@ -18,17 +25,19 @@ public class MainGui extends JFrame{
     JButton bStart = new JButton();
 
     JLabel label = new JLabel();
-
+    JLabel ob1 = new JLabel();
+    JLabel ob2 = new JLabel();
     JLabel ob5 = new JLabel("BLACK JACK");
 
+    JLabel label_deal = new JLabel();
+
     public static void main(String[] args){
-        SwingUtilities.invokeLater(() -> {
-            MainGui mainFrame = new MainGui();
-            mainFrame.setVisible(true);
-        });
+
     }
 
-    public MainGui(){
+    public MainGui(Client client){
+        this.client = client;
+
         setSize(1500, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -37,7 +46,8 @@ public class MainGui extends JFrame{
         getContentPane().setBackground(new Color(255, 255, 255));
 
         //ต้องเเก้เป็นที่เก็บเเต่ละเครื่อง
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\1.png";
+        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\1.png";
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\1.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
@@ -57,26 +67,33 @@ public class MainGui extends JFrame{
     }
     public void GameGui(){
         getContentPane().setBackground(new Color(9, 239, 30));
+        builtHitButton();
+        builtStandButton();
+        buildDeck();
 
-        deck();
-        hit();
-        stand();
-        scorePlayer();
-        scoreDealer();
 
     }
-    public void hit(){
+    public void builtHitButton(){
         bHit.setBounds(1100, 250, 100, 50);
         bHit.setBackground(colorButton);
         bHit.setFont(fontButton);
         bHit.setText("Hit");
+        bHit.addActionListener(e -> {
+            client.sendToServer("hit");
+        });
         this.add(bHit);
+
     }
-    public void stand(){
+    public void builtStandButton(){
         bStand.setBounds(1100, 400, 100, 50);
         bStand.setBackground(colorButton);
         bStand.setFont(fontButton);
         bStand.setText("Stand");
+        bStand.addActionListener(e -> {
+            client.sendToServer("stand");
+            remove(label_deal);
+            x_card_dealer-=210;
+        });
         this.add(bStand);
     }
     public void yes(){
@@ -99,17 +116,24 @@ public class MainGui extends JFrame{
         ob0.setFont(fontButton);
         this.add(ob0);
     }
-    public void scorePlayer(){
-        JLabel ob1 = new JLabel("You : ");
-        ob1.setBounds(75, 850,100, 18);
+    public void updateScorePlayer(Integer score){
+        remove(ob1);
+        ob1 = new JLabel();
+        ob1.setText("You : "+score);
+        ob1.setBounds(75, 850,100, 25);
         ob1.setFont(fontButton);
         this.add(ob1);
+
+
     }
-    public void scoreDealer(){
-        JLabel ob2 = new JLabel("Dealer : ");
-        ob2.setBounds(75, 50, 100, 18);
+    public void updateScoreDealer(Integer score){
+        remove(ob2);
+        ob2 = new JLabel();
+        ob2.setText("Dealer : "+score);
+        ob2.setBounds(75, 50, 200, 25);
         ob2.setFont(fontButton);
         this.add(ob2);
+
     }
     public void scoreResult(){
         if (true){
@@ -124,8 +148,9 @@ public class MainGui extends JFrame{
             this.add(ob4);
         }
     }
-    public void deck(){
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+    public void buildDeck(){
+        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
 
         JLabel label1 = new JLabel();
@@ -134,6 +159,34 @@ public class MainGui extends JFrame{
         getContentPane().add(label1);
     }
 
+    public void updateCardPlayer(Integer numcard) {
+        String namecard = String.valueOf(numcard+1);
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+
+        JLabel label = new JLabel();
+        label.setIcon(imageIcon);
+        label.setBounds(x_card_player, y_card_player, 200, 400);
+        x_card_player += 210;
+        getContentPane().add(label);
+
+
+    }
+    public void updateCardDealer(Integer numcard){
+        String namecard = String.valueOf(numcard+1);
+        if(numcard==-1){
+            namecard = "Back-red";
+        }
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\"+namecard+".png";
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+
+        label_deal = new JLabel();
+        label_deal.setIcon(imageIcon);
+        label_deal.setBounds(x_card_dealer, y_card_dealer, 200, 400);
+        x_card_dealer+=210;
+        getContentPane().add(label_deal);
+
+    }
     public void buttonStart(){
         bStart.setBounds(565, 550, 150, 50);
         bStart.setBackground(colorButton);
@@ -142,16 +195,21 @@ public class MainGui extends JFrame{
         bStart.setText("Start Game");
         add(bStart);
 
-        bStart.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                label.setVisible(false);
-                ob5.setVisible(false);
-                bStart.setVisible(false);
-                GameGui();
-            }
+        bStart.addActionListener(e -> {
+            client.sendToServer("Y");
+
+            label.setVisible(false);
+            ob5.setVisible(false);
+            bStart.setVisible(false);
+            GameGui();
         });
         bStart.setBounds(500, 500, 200, 50);
         getContentPane().add(bStart);
+    }
+
+    public void updateGui(){
+        revalidate();
+        repaint();
     }
 
 

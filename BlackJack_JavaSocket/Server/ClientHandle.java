@@ -38,11 +38,13 @@ public class ClientHandle implements Runnable{
                         writer.println("1" + responseToClient(dataGame));
                     }
                     case "hit" -> {
+
                         hitCard(dataGame);
                         ArrayList<ArrayList<Integer>> players = dataGame.getPlayers();
                         int new_card = players.get(1).get(players.get(1).size() - 1);
                         int new_score = players.get(1).get(0);
                         boolean status = dataGame.isStatus_player();
+                        System.out.println(new_card);
                         writer.println("2" + new_card + " " + new_score + " "+status);
                     }
                     case "stand" -> {
@@ -117,6 +119,7 @@ public class ClientHandle implements Runnable{
         dataGame.setDeck(deck);
         dataGame.setPlayers(players);
     }
+
     public static void botStartProcess(MDataGame dataGame){
         ArrayList<ArrayList<Integer>> players = dataGame.getPlayers();
         boolean status_bot = dataGame.isStatus_bot();

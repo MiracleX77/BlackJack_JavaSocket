@@ -1,42 +1,76 @@
 package BlackJack_JavaSocket.Client;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Client {
     private static final int PORT_NUMBER= 7600;
 
+    private static Socket socket;
+    private static BufferedReader reader;
+
+    private static PrintWriter writer;
+    private static  Scanner scanner;
+
+    private static  MainGui mainGui;
+
+
     private static ArrayList<ArrayList<Integer>> players = new ArrayList<>();
-    public static void main(String[] args) throws IOException {
-        String hostName = "localhost";
 
-        Socket socket = new Socket(hostName,PORT_NUMBER);
+    public  void connect(String serIp,int serPort) throws IOException{
+        socket = new Socket(serIp,serPort);
         System.out.println("Connected");
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         OutputStream output = socket.getOutputStream();
-        PrintWriter writer = new PrintWriter(output,true);
+        writer = new PrintWriter(output,true);
+        scanner = new Scanner(System.in);
+    }
 
-        Scanner scanner = new Scanner(System.in);
+    public MainGui genGui(){
+            MainGui mainFrame = new MainGui(this);
+            mainFrame.setVisible(true);
+        return  mainFrame;
+    }
+
+    public void sendToServer(String message){
+        writer.println(message);
+    }
+    public static String recFromServer() throws IOException {
+        return reader.readLine();
+    }
+    public static void main(String[] args) throws IOException {
+        Client client = new Client();
+        client.connect("localhost",PORT_NUMBER);
+        MainGui mainGui = client.genGui();
+
+
 
         String message;
         while(true){
             players.clear();
             System.out.println("New game(Y/N): ");
-            message= scanner.nextLine();
-
+            message= recFromServer();
+            System.out.println(message);
             if(!Objects.equals(message,"N")) {
                 while (true) {
-                    writer.println(message);
-                    message= reader.readLine();
+//                    writer.println(message);
+//                    message= reader.readLine();
                     if(message.charAt(0) == '1'){
                         System.out.println(message);
                         convertStringToArrayList(message);
+                        mainGui.updateCardDealer(players.get(0).get(1));
+                        mainGui.updateCardDealer(-1);
+                        for(int i =1;i<players.get(1).size();i++){
+                            mainGui.updateCardPlayer(players.get(1).get(i));
+                        }
+                        mainGui.updateScorePlayer(players.get(1).get(0));
+                        mainGui.updateScoreDealer(players.get(0).get(0));
+
+                        mainGui.updateGui();
 
                         System.out.println("*---------------------------------------------*");
                         System.out.println("Player 1 Card -> : " + players.get(0).get(1) + " ** ");
@@ -56,6 +90,12 @@ public class Client {
                         int hit_card = Integer.parseInt(str[0]);
                         int new_score = Integer.parseInt(str[1]);
                         boolean status_player = Boolean.parseBoolean(str[2]);
+
+                        mainGui.updateCardPlayer(hit_card);
+                        mainGui.updateScorePlayer(new_score);
+
+                        mainGui.updateGui();
+
                         players.get(1).set(0,new_score);
                         players.get(1).add(hit_card);
                         System.out.println("*---------------------------------------------*");
@@ -76,6 +116,14 @@ public class Client {
                     }
                     else  if(message.charAt(0) == '3'){
                         convertStringToArrayList(message);
+                        for(int i =2;i<players.get(0).size();i++){
+                            mainGui.updateCardDealer(players.get(0).get(i));
+                        }
+                        mainGui.updateScoreDealer(players.get(0).get(0));
+
+                        mainGui.updateGui();
+
+
                         System.out.println(message);
                         System.out.println("*---------------------------------------------*");
                         System.out.print("Player 1 Card -> : ");
@@ -105,7 +153,7 @@ public class Client {
                     else {
                         System.out.println(message);
                     }
-                    message= scanner.nextLine();
+                    message = recFromServer();
                 }
             }
             else {
