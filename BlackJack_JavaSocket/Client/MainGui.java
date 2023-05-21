@@ -46,8 +46,8 @@ public class MainGui extends JFrame{
         getContentPane().setBackground(new Color(255, 255, 255));
 
         //ต้องเเก้เป็นที่เก็บเเต่ละเครื่อง
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\LOGO.png";
-//        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\1.png";
+//        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\LOGO.png";
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\LOGO.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
@@ -149,8 +149,8 @@ public class MainGui extends JFrame{
         }
     }
     public void buildDeck(){
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
-        //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
 
         JLabel label1 = new JLabel();
@@ -161,8 +161,8 @@ public class MainGui extends JFrame{
 
     public void updateCardPlayer(Integer numcard) {
         String namecard = String.valueOf(numcard+1);
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
-//        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
+        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
 
         JLabel label = new JLabel();
@@ -178,8 +178,8 @@ public class MainGui extends JFrame{
         if(numcard==-1){
             namecard = "Back-red";
         }
-        String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
-        //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\"+namecard+".png";
+        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
+        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\"+namecard+".png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
 
         label_deal = new JLabel();
