@@ -36,7 +36,7 @@ public class Client {
         return  mainFrame;
     }
 
-    public void sendToServer(String message){
+    public static void sendToServer(String message){
         writer.println(message);
     }
     public static String recFromServer() throws IOException {
@@ -120,8 +120,9 @@ public class Client {
                             mainGui.updateCardDealer(players.get(0).get(i));
                         }
                         mainGui.updateScoreDealer(players.get(0).get(0));
-
                         mainGui.updateGui();
+
+                        sendToServer("result");
 
 
                         System.out.println(message);
