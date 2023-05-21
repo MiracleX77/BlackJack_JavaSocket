@@ -4,20 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainGui extends JFrame{
     private Client client;
 
-
+    //private final String full_path ="C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\";
+    private final String full_path ="C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\";
+    //private final String full_path ="/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/";
     private int x_card_player = 100;
-    private int y_card_player = 340;
 
     private int x_card_dealer = 100;
-    private int y_card_dealer = 30;
 
-    Color colorBackground = new Color(255, 255, 255);
     Font fontButton = new Font("Arial", Font.PLAIN ,25);
-    Font fontText = new Font("Arial", Font.PLAIN ,40);
+
     JButton bHit = new JButton();
     JButton bStand = new JButton();
     JButton bAgain = new JButton();
@@ -48,11 +48,18 @@ public class MainGui extends JFrame{
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 255, 255));
 
-        //ต้องเเก้เป็นที่เก็บเเต่ละเครื่อง
+        builtLOGO();
+        builtText();
+        buttonStart();
+    }
 
-        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\20.png";
-//        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\1.png";
-        String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/LOGO.png";
+    public void GameGui(){
+        getContentPane().setBackground(new Color(13, 117, 13));
+        builtHitButton();
+        builtStandButton();
+    }
+    public void builtLOGO(){
+        String imagePath = full_path+"LOGO.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
@@ -61,107 +68,54 @@ public class MainGui extends JFrame{
         label.setIcon(resizedImageIcon);
         label.setBounds(550, 200, 200, 200);
         getContentPane().add(label);
-
-
+    }
+    public void builtText(){
         Font fontButton = new Font("Arial", Font.BOLD, 20);
         ob5.setFont(fontButton);
         ob5.setBounds(585, 400, 200, 50);
         getContentPane().add(ob5);
-
-        buttonStart();
-    }
-    public void GameGui(){
-        getContentPane().setBackground(new Color(13, 117, 13));
-        builtHitButton();
-        builtStandButton();
-        //buildDeck();
-
-
     }
     public void builtHitButton(){
         bHit.setBounds(1100, 250, 100, 50);
         bHit.setFont(fontButton);
         bHit.setText("Hit");
         bHit.addActionListener(e -> {
-            client.sendToServer("hit");
+            Client.sendToServer("hit");
         });
         this.add(bHit);
 
     }
     public void builtAgainButton(){
+        remove(bHit);
+        remove(bStand);
         bAgain.setBounds(1015, 375, 150, 50);
         bAgain.setFont(fontButton);
         bAgain.setText("Again");
         bAgain.addActionListener(e ->{
-        label.setVisible(true);
-        ob5.setVisible(true);
-        bStart.setVisible(true);
-        remove(bAgain);//เริ่มเกมใหม่
-        updateGui();
-
+            dispose();
+            client.genGui();
+            updateGui();
         });
+        getContentPane().add(bAgain);
+    }
+    public void builtExitButton(){
+        bExit.setBounds(1015, 450, 150, 50);
+        bExit.setFont(fontButton);
+        bExit.setText("Exit");
+        bExit.addActionListener(e ->{
+            dispose(); // ลบเฟรม
+        });
+        getContentPane().add(bExit);
     }
     public void builtStandButton(){
         bStand.setBounds(1100, 400, 100, 50);
         bStand.setFont(fontButton);
         bStand.setText("Stand");
         bStand.addActionListener(e -> {
-            client.sendToServer("stand");
+            Client.sendToServer("stand");
             remove(label_deal);
             x_card_dealer-=210;
 
-            //again
-            bAgain.setBounds(1015, 375, 150, 50);
-            bAgain.setFont(fontButton);
-            bAgain.setText("Again");
-            //bAgain.addActionListener(e2 ->{
-                //
-            //});
-            //button exit
-            bExit.setBounds(1015, 450, 150, 50);
-            bExit.setFont(fontButton);
-            bExit.setText("Exit");
-            //bExit.addActionListener(e -> {
-            //    //กลับไปหน้าแรก หรือไม่ก็เด้งปิด
-            //});
-    
-            //youWin
-            String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/win.png";
-                //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
-            ImageIcon imageIcon = new ImageIcon(imagePath);
-            label2.setIcon(imageIcon);
-            label2.setBounds(950, 150, 800, 500);
-            
-            //youLost
-            String imagePath1 = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/lost.png";
-                    //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
-            ImageIcon imageIcon1 = new ImageIcon(imagePath);
-            label3.setIcon(imageIcon1);
-            label3.setBounds(950, 150, 800, 500);
-            
-            //youDraw
-            String imagePath2 = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/draw.png";
-                    //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
-            ImageIcon imageIcon2 = new ImageIcon(imagePath);
-            label4.setIcon(imageIcon2);
-            label4.setBounds(950, 150, 800, 500);
-            
-            //add(ob0); //play again
-            remove(bHit);
-            remove(bStand);
-            add(bExit);
-            add(bAgain);
-            getContentPane().add(label2);
-
-            //if (scoredealer > 22 ){
-                //getContentPane().add(label2);
-            //} else if (scoreplayer > 22 || scoredealer > scoreplayer){
-                //getContentPane().add(label3);
-            //} else if (scoredealer < scoreplayer){
-                //getContentPane().add(label2);
-            //} else {
-                //getContentPane().add(label4);
-            //}
         });
         this.add(bStand);
     } 
@@ -174,25 +128,31 @@ public class MainGui extends JFrame{
         this.add(ob1);
     }
     public void youWin(){
-        String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/win.png";
-            //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+        String imagePath = full_path+"win.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         label2.setIcon(imageIcon);
         label2.setBounds(950, 150, 800, 500);
+        builtAgainButton();
+        builtExitButton();
+        getContentPane().add(label2);
     }
     public void youLost(){
-        String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/Lost.png";
-            //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+        String imagePath = full_path+"lost.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         label3.setIcon(imageIcon);
         label3.setBounds(950, 150, 800, 500);
+        builtAgainButton();
+        builtExitButton();
+        getContentPane().add(label3);
     }
     public void youDraw(){
-        String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/draw.png";
-            //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
+        String imagePath = full_path+"draw.png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
         label4.setIcon(imageIcon);
         label4.setBounds(950, 150, 800, 500);
+        builtAgainButton();
+        builtExitButton();
+        getContentPane().add(label4);
     }
     public void updateScoreDealer(Integer score){
         remove(ob2);
@@ -204,29 +164,18 @@ public class MainGui extends JFrame{
 
     }
     
-    public void buildDeck(){
-        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
-        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\back-red.png";
-        ImageIcon imageIcon = new ImageIcon(imagePath);
-
-        JLabel label1 = new JLabel();
-        label1.setIcon(imageIcon);
-        label1.setBounds(70, 250, 200, 400);
-        getContentPane().add(label1);
-    }
 
     public void updateCardPlayer(Integer numcard) {
         String namecard = String.valueOf(numcard+1);
-
-        String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/" + namecard + ".png";
-        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
-//        String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
+        String imagePath = full_path + namecard + ".png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
 
         JLabel label = new JLabel();
         label.setIcon(imageIcon);
+        int y_card_player = 340;
         label.setBounds(x_card_player, y_card_player, 200, 400);
         x_card_player += 210;
+
         getContentPane().add(label);
 
 
@@ -236,14 +185,12 @@ public class MainGui extends JFrame{
         if(numcard==-1){
             namecard = "Back-red";
         }
-
-        String imagePath = "/Users/maitokairin/Documents/GitHub/BlackJack_JavaSocket/BlackJack_JavaSocket/Client/numcard/" + namecard + ".png";
-        //String imagePath = "C:\\Users\\mrbig\\Documents\\BlackJack\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\" + namecard + ".png";
-        //String imagePath = "C:\\Users\\miracle\\Documents\\GitHub\\BlackJack_JavaSocket\\BlackJack_JavaSocket\\Client\\numcard\\"+namecard+".png";
+        String imagePath = full_path + namecard + ".png";
         ImageIcon imageIcon = new ImageIcon(imagePath);
 
         label_deal = new JLabel();
         label_deal.setIcon(imageIcon);
+        int y_card_dealer = 30;
         label_deal.setBounds(x_card_dealer, y_card_dealer, 200, 400);
         x_card_dealer+=210;
         getContentPane().add(label_deal);
@@ -256,8 +203,7 @@ public class MainGui extends JFrame{
         add(bStart);
 
         bStart.addActionListener(e -> {
-            client.sendToServer("Y");
-
+            Client.sendToServer("Y");
             label.setVisible(false);
             ob5.setVisible(false);
             bStart.setVisible(false);
@@ -270,6 +216,10 @@ public class MainGui extends JFrame{
     public void updateGui(){
         revalidate();
         repaint();
+    }
+    public void resetGui(){
+        getContentPane().removeAll();
+        updateGui();
     }
 
 

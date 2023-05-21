@@ -21,47 +21,21 @@ public class Client {
 
     private static ArrayList<ArrayList<Integer>> players = new ArrayList<>();
 
-    public  void connect(String serIp,int serPort) throws IOException{
-        socket = new Socket(serIp,serPort);
-        System.out.println("Connected");
-        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        OutputStream output = socket.getOutputStream();
-        writer = new PrintWriter(output,true);
-        scanner = new Scanner(System.in);
-    }
 
-    public MainGui genGui(){
-            MainGui mainFrame = new MainGui(this);
-            mainFrame.setVisible(true);
-        return  mainFrame;
-    }
-
-    public static void sendToServer(String message){
-        writer.println(message);
-    }
-    public static String recFromServer() throws IOException {
-        return reader.readLine();
-    }
     public static void main(String[] args) throws IOException {
         Client client = new Client();
         client.connect("localhost",PORT_NUMBER);
-        MainGui mainGui = client.genGui();
-
-
-
+        client.genGui();
         String message;
         while(true){
             players.clear();
-            System.out.println("New game(Y/N): ");
             message= recFromServer();
-            System.out.println(message);
+//            System.out.println(message);
             if(!Objects.equals(message,"N")) {
                 while (true) {
-//                    writer.println(message);
-//                    message= reader.readLine();
                     if(message.charAt(0) == '1'){
-                        System.out.println(message);
                         convertStringToArrayList(message);
+
                         mainGui.updateCardDealer(players.get(0).get(1));
                         mainGui.updateCardDealer(-1);
                         for(int i =1;i<players.get(1).size();i++){
@@ -72,19 +46,8 @@ public class Client {
 
                         mainGui.updateGui();
 
-                        System.out.println("*---------------------------------------------*");
-                        System.out.println("Player 1 Card -> : " + players.get(0).get(1) + " ** ");
-                        System.out.println("Player 1 Count Score -> : " + players.get(0).get(0));
-                        System.out.println("*---------------------------------------------*");
-                        System.out.print("Player 2 Card -> : ");
-                        for(int i =1;i<players.get(1).size();i++){
-                            System.out.print(players.get(1).get(i)+" ");
-                        }
-                        System.out.println("\nPlayer 2 Count Score -> : " + players.get(1).get(0));
-                        System.out.println("*---------------------------------------------*");
                     }
                     else  if(message.charAt(0) == '2'){
-                        System.out.println(message);
                         String messages = message.substring(1);
                         String[] str = messages.split(" ");
                         int hit_card = Integer.parseInt(str[0]);
@@ -98,24 +61,17 @@ public class Client {
 
                         players.get(1).set(0,new_score);
                         players.get(1).add(hit_card);
-                        System.out.println("*---------------------------------------------*");
-                        System.out.println("Player 1 Card -> : " + players.get(0).get(1) + " ** ");
-                        System.out.println("Player 1 Count Score -> : " + players.get(0).get(0));
-                        System.out.println("*---------------------------------------------*");
-                        System.out.print("Player 2 Card -> : ");
-                        for(int i =1;i<players.get(1).size();i++){
-                            System.out.print(players.get(1).get(i)+" ");
-                        }
-                        System.out.println("\nPlayer 2 Count Score -> : " + players.get(1).get(0));
-                        System.out.println("Player 2 Status -> "+status_player);
-                        System.out.println("*---------------------------------------------*");
+
                         if(!status_player){
-                            System.out.println("-------------YOU LOSS!!---------");
+                            mainGui.youLost();
+                            mainGui.updateGui();
                             break;
                         }
                     }
                     else  if(message.charAt(0) == '3'){
+
                         convertStringToArrayList(message);
+
                         for(int i =2;i<players.get(0).size();i++){
                             mainGui.updateCardDealer(players.get(0).get(i));
                         }
@@ -124,48 +80,54 @@ public class Client {
 
                         sendToServer("result");
 
-
-                        System.out.println(message);
-                        System.out.println("*---------------------------------------------*");
-                        System.out.print("Player 1 Card -> : ");
-                        for(int i =1;i<players.get(0).size();i++){
-                            System.out.print(players.get(0).get(i)+" ");
-                        }
-                        System.out.println("\nPlayer 1 Count Score -> : " + players.get(0).get(0));
-                        System.out.println("*---------------------------------------------*");
-                        System.out.print("Player 2 Card -> : ");
-                        for(int i =1;i<players.get(1).size();i++){
-                            System.out.print(players.get(1).get(i)+" ");
-                        }
-                        System.out.println("\nPlayer 2 Count Score -> : " + players.get(1).get(0));
-                        System.out.println("*---------------------------------------------*");
                     }
                     else  if(message.charAt(0) == '4'){
-                        System.out.println("------------RESULT-----------------");
-                        System.out.println("------------"+message.substring(1)+"-----------------");
-                        System.out.println("*---------------------------------------------*");
-                    }
-
-
-                    else if(message.equals("GG")){
-                        System.out.println(message);
+                        if(message.substring(1).equals("win")){
+                            mainGui.youWin();
+                        }
+                        else if (message.substring(1).equals("draw")){
+                            mainGui.youDraw();
+                        }
+                        else{
+                            mainGui.youLost();
+                        }
+                        mainGui.updateGui();
                         break;
                     }
-                    else {
-                        System.out.println(message);
-                    }
+
                     message = recFromServer();
                 }
             }
             else {
                 break;
             }
-
         }
         socket.close();
 
     }
 
+    public  void connect(String serIp,int serPort) throws IOException{
+        socket = new Socket(serIp,serPort);
+        System.out.println("Connected");
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        OutputStream output = socket.getOutputStream();
+        writer = new PrintWriter(output,true);
+        scanner = new Scanner(System.in);
+    }
+
+    public void genGui(){
+        MainGui mainFrame = new MainGui(this);
+        mainFrame.setVisible(true);
+        mainGui = mainFrame;
+
+    }
+
+    public static void sendToServer(String message){
+        writer.println(message);
+    }
+    public static String recFromServer() throws IOException {
+        return reader.readLine();
+    }
     public static void convertStringToArrayList(String message){
         players.clear();
         //1[[35, 48], [43, 40]]

@@ -54,7 +54,9 @@ public class ClientHandle implements Runnable{
                     }
                     case "result" -> {
                         if(dataGame.getTurn_player() == 2){
+
                             summaryResult(dataGame);
+                            System.out.println(dataGame.getResult());
                             writer.println("4" + dataGame.getResult());
                         }
                     }
@@ -81,7 +83,7 @@ public class ClientHandle implements Runnable{
         System.out.println(Arrays.toString(deck.getDeck().toArray()));
         //deal card to player
         dealCardToPlayer(dataGame);
-        System.out.println(Arrays.toString(players.toArray()));
+
 
         dataGame.setDeck(deck);
         dataGame.setPlayers(players);
@@ -102,6 +104,8 @@ public class ClientHandle implements Runnable{
             if(index_player==players.size()){
                 index_player=0;
             }
+            
+
         }
         dataGame.setDeck(deck);
         dataGame.setPlayers(players);
@@ -130,13 +134,13 @@ public class ClientHandle implements Runnable{
         double count_card_without10 = count_deck - 16.0;
         while(true){
             double bot_score = players.get(0).get(0);
-            System.out.println(bot_score);
+
             // เป็นการคิดว่าตัดสินใจของ bot โดยพื้นฐาน โดยอ้างอิง ความน่าจะเป็นที่จะ hit เเล้วจะรอด กับการ random ในความน่าจะเป็นอีกที
             // ความน่าจะเป็นนี้ไม่นับจาก กาดใน deck ที่เหลือ เเต่จะนับจาก กาดทั้งหมด
             // กรณี bot มี 12 คะเเนน ถ้าจะ hit ต้องได้น้อยกว่า 10 หรือก็คือ มี 36 ใบ ที่จะรอด ความน่าเป็นคือ 0.692
             // ดังนั้นจะเอา 0.75 มาใช้การ random ว่าจะอยู่ใน 0.75 นี้ไหม
             // ถ้าอยุ่ จะให้ hit เเต่ถ้าไม่ ก็ stand
-            if (bot_score>=21){
+            if (bot_score>21){
                 status_bot = false;
                 turn_player=2;
                 break;
@@ -151,7 +155,6 @@ public class ClientHandle implements Runnable{
                     hitCard(dataGame);
                 }
                 else{
-                    System.out.println("stand");
                     turn_player=2;
                     break;
                 }
@@ -188,7 +191,8 @@ public class ClientHandle implements Runnable{
     public static void summaryResult(MDataGame dataGame){
         ArrayList<ArrayList<Integer>> players = dataGame.getPlayers();
         boolean status_bot = dataGame.isStatus_bot();
-        String result = dataGame.getResult();
+        String result = "";
+        System.out.println(status_bot);
 
         int score_bot = players.get(0).get(0);
         int score_player = players.get(1).get(0);
@@ -207,7 +211,7 @@ public class ClientHandle implements Runnable{
         Deck deck = dataGame.getDeck();
         ArrayList<ArrayList<Integer>> players = dataGame.getPlayers();
         int turn_player = dataGame.getTurn_player();
-        System.out.println(turn_player);
+
         boolean status_player = dataGame.isStatus_player();
 
         int sum_score = players.get(index_player).get(0);
