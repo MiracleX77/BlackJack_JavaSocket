@@ -15,7 +15,6 @@ public class ClientHandle implements Runnable{
 
     public ClientHandle(Socket clientSocket){
         this.clientSocket = clientSocket;
-
     }
 
     @Override
@@ -38,13 +37,11 @@ public class ClientHandle implements Runnable{
                         writer.println("1" + responseToClient(dataGame));
                     }
                     case "hit" -> {
-
                         hitCard(dataGame);
                         ArrayList<ArrayList<Integer>> players = dataGame.getPlayers();
                         int new_card = players.get(1).get(players.get(1).size() - 1);
                         int new_score = players.get(1).get(0);
                         boolean status = dataGame.isStatus_player();
-                        System.out.println(new_card);
                         writer.println("2" + new_card + " " + new_score + " "+status);
                     }
                     case "stand" -> {
@@ -54,9 +51,7 @@ public class ClientHandle implements Runnable{
                     }
                     case "result" -> {
                         if(dataGame.getTurn_player() == 2){
-
                             summaryResult(dataGame);
-                            System.out.println(dataGame.getResult());
                             writer.println("4" + dataGame.getResult());
                         }
                     }
@@ -81,9 +76,7 @@ public class ClientHandle implements Runnable{
         deck.builtDeck();
         //[9, 1, 48, 31, 7, 0, 37, 40, 30, 25, 26, 2, 43, 6, 13, 19, 23, 50, 39, 33, 28, 46, 36, 8, 29, 42, 4, 16, 14, 17, 15, 51, 11, 32, 12, 47, 3, 5, 10, 24, 20, 49, 22, 45, 38, 34, 27, 21, 44, 41, 18, 35]
         System.out.println(Arrays.toString(deck.getDeck().toArray()));
-        //deal card to player
         dealCardToPlayer(dataGame);
-
 
         dataGame.setDeck(deck);
         dataGame.setPlayers(players);
@@ -104,7 +97,6 @@ public class ClientHandle implements Runnable{
             if(index_player==players.size()){
                 index_player=0;
             }
-            
 
         }
         dataGame.setDeck(deck);
