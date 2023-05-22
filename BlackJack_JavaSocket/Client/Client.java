@@ -20,17 +20,20 @@ public class Client {
     private static ArrayList<ArrayList<Integer>> players = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
+
         Client client = new Client();
         client.connect("localhost", PORT_NUMBER);
         client.genGui();
+
         String message;
+
         while (true) {
             players.clear();
             message = recFromServer();
             // System.out.println(message);
             if (!Objects.equals(message, "N")) {
                 while (true) {
-                    if (message.charAt(0) == '1') {
+                    if (message.charAt(0) == '1') { // rec data card player and dealer
                         convertStringToArrayList(message);
 
                         mainGui.updateCardDealer(players.get(0).get(1));
@@ -43,7 +46,7 @@ public class Client {
 
                         mainGui.updateGui();
 
-                    } else if (message.charAt(0) == '2') {
+                    } else if (message.charAt(0) == '2') { // hit rec data new card
                         String messages = message.substring(1);
                         String[] str = messages.split(" ");
                         int hit_card = Integer.parseInt(str[0]);
@@ -63,7 +66,7 @@ public class Client {
                             mainGui.updateGui();
                             break;
                         }
-                    } else if (message.charAt(0) == '3') {
+                    } else if (message.charAt(0) == '3') { //stand rec data of card dealer
 
                         convertStringToArrayList(message);
 
@@ -75,7 +78,7 @@ public class Client {
 
                         sendToServer("result");
 
-                    } else if (message.charAt(0) == '4') {
+                    } else if (message.charAt(0) == '4') { // result
                         if (message.substring(1).equals("win")) {
                             mainGui.youWin();
                         } else if (message.substring(1).equals("draw")) {
@@ -86,7 +89,6 @@ public class Client {
                         mainGui.updateGui();
                         break;
                     }
-
                     message = recFromServer();
                 }
             } else {
